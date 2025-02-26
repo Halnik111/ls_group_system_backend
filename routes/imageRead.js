@@ -1,5 +1,5 @@
 import express from "express";
-import {test, readImage, uploadImage} from '../controllers/imageReadController.js';
+import {test, uploadImage} from '../controllers/imageReadController.js';
 
 const router = express.Router()
 
@@ -28,7 +28,6 @@ const upload = multer({
 });
 
 router.get('/test', test);
-router.post('/read', readImage);
 router.post('/upload', upload.single('files'),uploadImage);
 
 export default router;
