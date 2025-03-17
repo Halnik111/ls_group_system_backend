@@ -1,12 +1,9 @@
 import express from "express";
-import {test, uploadImage} from '../controllers/imageReadController.js';
-
-const router = express.Router()
-
+import {test, uploadImage} from '../controllers/apiController.js';
 import multer from "multer";
 import * as path from "node:path";
-import fs from 'fs';
 
+const router = express.Router()
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -28,6 +25,7 @@ const upload = multer({
 });
 
 router.get('/test', test);
-router.post('/upload', upload.single('files'),uploadImage);
+router.post('/upload', upload.single('files'), uploadImage);
+
 
 export default router;
