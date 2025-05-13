@@ -1,10 +1,13 @@
 import db from '../postgres.js';
-import knex from "knex";
 
 export const getAllActiveWork = async (req, res) => {
     try {
-        
-        res.status(200).json()
+        await db('work')
+            .join('vehicles', 'work.vehicle_id', 'vehicles.id')
+            .where('work.status', 'active')
+            .then(data => {
+                res.status(200).json(data)
+            });
     }
     catch (err) {
         res.status(409).json("message: " + err.message);
